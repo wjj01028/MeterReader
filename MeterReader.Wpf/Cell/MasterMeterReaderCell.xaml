@@ -1,0 +1,41 @@
+<UserControl x:Class="MeterReader.Wpf.Cell.MasterMeterReaderCell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MeterReader.Wpf"
+             mc:Ignorable="d"
+             Height="36"
+             d:DataContext="{d:DesignInstance local:MeterDisplayItem}">
+    <Border x:Name="RowBorder" Background="Transparent" Padding="4,3">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding Index, StringFormat={}{0}}" 
+                       Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding MeterType}" 
+                       Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Text="{Binding NormalRange}" 
+                       Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="3" Text="{Binding Reading}" 
+                       Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="4" Text="{Binding RecognitionTime}" 
+                       Foreground="White" FontSize="12" VerticalAlignment="Center"/>
+        </Grid>
+    </Border>
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsNormal}" Value="False">
+                    <Setter Property="Background" Value="#CC3333"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+</UserControl>

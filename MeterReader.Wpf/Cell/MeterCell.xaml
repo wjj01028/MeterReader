@@ -1,0 +1,83 @@
+<UserControl x:Class="MeterReader.Wpf.Cell.MeterCell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="4" Margin="0,0,0,6" Padding="8" Background="#2D2D30">
+        <StackPanel>
+            <!-- 第一行：颜色 + 编号 -->
+            <StackPanel Orientation="Horizontal">
+                <Border x:Name="ColorSwatch" Width="14" Height="14" CornerRadius="2" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtIndex" Foreground="#CCCCCC" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- 第二行：坐标 + 长宽 -->
+            <TextBlock x:Name="TxtCoordinate" Margin="0,2,0,0" FontSize="11" Foreground="#999"/>
+            <TextBlock x:Name="TxtSize" Margin="0,0,0,0" FontSize="11" Foreground="#999"/>
+
+            <!-- 第三行：仪表类型 + 按钮 -->
+            <Grid Margin="0,6,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="类型：" Foreground="#999" FontSize="11" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <TextBlock x:Name="TxtMeterTypeLabel" 
+                               Foreground="#CCCCCC" FontSize="11" VerticalAlignment="Center"
+                               Visibility="Collapsed"/>
+                    <ComboBox x:Name="CmbMeterType" 
+                              Width="100" Height="24"
+                              FontSize="11"
+                              Foreground="Black"
+                              Background="#3C3C3C"
+                              BorderBrush="#555555"
+                              Visibility="Collapsed"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="流量计"/>
+                        <ComboBoxItem Content="压力表"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="BtnCellEdit"
+                            Content="编辑"
+                            Click="BtnCellEdit_Click"
+                            Width="48" Height="22"
+                            FontSize="11"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Visibility="Collapsed"/>
+                    <Button x:Name="BtnCellDelete"
+                            Content="删除"
+                            Click="BtnCellDelete_Click"
+                            Width="48" Height="22"
+                            FontSize="11"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Visibility="Collapsed"
+                            Margin="0,0,6,0"/>
+                    <Button x:Name="BtnCellSave"
+                            Content="保存"
+                            Click="BtnCellSave_Click"
+                            Width="48" Height="22"
+                            FontSize="11"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Visibility="Collapsed"
+                            Margin="0,0,6,0"/>
+                    <Button x:Name="BtnCellCancel"
+                            Content="取消"
+                            Click="BtnCellCancel_Click"
+                            Width="48" Height="22"
+                            FontSize="11"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

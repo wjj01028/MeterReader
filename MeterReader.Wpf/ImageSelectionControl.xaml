@@ -1,0 +1,68 @@
+<UserControl x:Class="MeterReader.Wpf.ImageSelectionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <Border BorderBrush="#3F3F46" BorderThickness="1" Background="#252526">
+            <Grid>
+                <ScrollViewer x:Name="ImageScrollViewer" 
+                              HorizontalScrollBarVisibility="Auto" 
+                              VerticalScrollBarVisibility="Auto"
+                              SizeChanged="ImageScrollViewer_SizeChanged">
+                    <Canvas x:Name="ImageCanvas" 
+                            MouseDown="ImageCanvas_MouseDown"
+                            MouseMove="ImageCanvas_MouseMove"
+                            MouseUp="ImageCanvas_MouseUp"
+                            Background="Transparent">
+                        <Canvas.LayoutTransform>
+                            <ScaleTransform x:Name="ZoomTransform" ScaleX="1" ScaleY="1"/>
+                        </Canvas.LayoutTransform>
+                        <Image x:Name="DisplayImage" 
+                               Stretch="None"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <!-- 仪表覆盖层 -->
+                        <Canvas x:Name="OverlayCanvas"/>
+                        <!-- 框选矩形 -->
+                        <Rectangle x:Name="SelectionRect"
+                                   Stroke="#0044CC"
+                                   StrokeThickness="10"
+                                   Fill="Transparent"
+                                   Visibility="Collapsed"
+                                   StrokeDashArray="6,3"/>
+                    </Canvas>
+                </ScrollViewer>
+
+                <!-- 右下角缩放按钮 -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,8,8">
+                    <Button x:Name="BtnZoomOut"
+                            Content="−"
+                            Click="BtnZoomOut_Click"
+                            Width="28" Height="28"
+                            FontSize="16" FontWeight="Bold"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuIconButtonStyle}"
+                            Margin="0,0,2,0"/>
+                    <Button x:Name="BtnZoomIn"
+                            Content="+"
+                            Click="BtnZoomIn_Click"
+                            Width="28" Height="28"
+                            FontSize="16" FontWeight="Bold"
+                            Cursor="Hand"
+                            Style="{StaticResource MenuIconButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="Placeholder"
+                   Text="请选择模板图片"
+                   Foreground="#6E6E6E"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

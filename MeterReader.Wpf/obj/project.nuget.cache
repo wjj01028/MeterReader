@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "XxZIztVyqxs=",
+  "success": true,
+  "projectFilePath": "f:\\MCP_PRJ\\New_and\\BCH_MeterReader\\MeterReader.Wpf\\MeterReader.Wpf.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\WANGJUNJUN\\.nuget\\packages\\opencvsharp4\\4.9.0.20240103\\opencvsharp4.4.9.0.20240103.nupkg.sha512",
+    "C:\\Users\\WANGJUNJUN\\.nuget\\packages\\opencvsharp4.runtime.win\\4.9.0.20240103\\opencvsharp4.runtime.win.4.9.0.20240103.nupkg.sha512"
+  ],
+  "logs": []
+}
