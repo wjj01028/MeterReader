@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using MeterReader.App;
+using MeterReader.Wpf.Services;
 using Microsoft.Win32;
 using OpenCvSharp;
 using Window = System.Windows.Window;
@@ -83,6 +84,7 @@ public partial class MainWindow : Window
             LoadLatestReadings();
 
             // 重新扫描已生成的图片
+            _latestImages.Clear();
             ScanLatestImages();
         }
         catch { }
@@ -246,6 +248,32 @@ public partial class MainWindow : Window
                             item.RecognitionTime = "--";
                         }
                     }
+                    else if (item != null && meter.MeterType == "流量计")
+                    {
+                        string nowTime = DateTime.Now.ToString("yyyyMMdd-HH:mm:ss");
+                        try
+                        {
+                            // 生成增强图（灰度CLAHE）供流量计边缘检测
+                            using var gray = new Mat();
+                            Cv2.CvtColor(crop, gray, ColorConversionCodes.BGR2GRAY);
+                            using var clahe = Cv2.CreateCLAHE(2.0, new OpenCvSharp.Size(8, 8));
+                            using var enhanced = new Mat();
+                            clahe.Apply(gray, enhanced);
+
+                            var flowResult = FlowMeterRecognizer.Recognize(crop.Clone(), enhanced, meterDir, $"{nowStr}_meter{meter.Index}");
+
+                            item.Reading = flowResult.reading;
+                            item.RecognitionTime = nowTime;
+
+                            // 保存到按天 JSON（流量计只有 Black 值）
+                            SaveFlowResult(meter.Index, flowResult);
+                        }
+                        catch
+                        {
+                            item.Reading = "--";
+                            item.RecognitionTime = "--";
+                        }
+                    }
                     else if (item != null)
                     {
                         item.RecognitionTime = "--";
@@ -276,6 +304,17 @@ public partial class MainWindow : Window
         string jsonPath = Path.Combine(meterDir, $"ReaderResult_{DateTime.Now:yyyyMMdd}.json");
 
         JsonHelper.AppendResult(jsonPath, instrumentNo, result);
+    }
+
+    private static void SaveFlowResult(int instrumentNo, FlowResult result)
+    {
+        // 将流量计结果转为 GaugeResult 格式统一存储（只有 Black 值）
+        var gauge = new GaugeResult
+        {
+            reading = result.reading,
+            blackValue = double.TryParse(result.reading, out var v) ? v : 0
+        };
+        SaveGaugeResult(instrumentNo, gauge);
     }
 
     private void MeterListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -314,7 +353,9 @@ public partial class MainWindow : Window
 
     private void CkbDebugImages_Changed(object sender, RoutedEventArgs e)
     {
-        PressureRecognizer.SaveDebugImages = CkbDebugImages.IsChecked == true;
+        bool on = CkbDebugImages.IsChecked == true;
+        PressureRecognizer.SaveDebugImages = on;
+        FlowMeterRecognizer.SaveDebugImages = on;
     }
 
     private void BtnSettings_Click(object sender, RoutedEventArgs e)

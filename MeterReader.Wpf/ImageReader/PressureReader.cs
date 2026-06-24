@@ -1,7 +1,7 @@
 using System.IO;
 using OpenCvSharp;
 
-namespace MeterReader.App;
+namespace MeterReader.Wpf.ImageReader;
 
 /// <summary>压力表识别器V3：切割黑色圆环 → 整形矫正 → 标记圆心和红绿指针</summary>
 public static class PressureRecognizer

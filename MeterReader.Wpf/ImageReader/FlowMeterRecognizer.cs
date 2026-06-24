@@ -1,7 +1,7 @@
 using System.IO;
 using OpenCvSharp;
 
-namespace MeterReader.Wpf.Services;
+namespace MeterReader.Wpf.ImageReader;
 
 /// <summary>流量计识别结果</summary>
 public class FlowResult
@@ -15,6 +15,8 @@ public class FlowResult
 /// <summary>流量计识别器</summary>
 public static class FlowMeterRecognizer
 {
+    /// <summary>是否保存识别过程中生成的中间调试图片</summary>
+    public static bool SaveDebugImages { get; set; }
     
     private static readonly float[] FlowScaleValues = [100, 200, 400, 600, 800, 1000];
 
@@ -145,6 +147,6 @@ public static class FlowMeterRecognizer
         Cv2.PutText(marked, $"Reading: {reading}",
             new OpenCvSharp.Point(10, 30), HersheyFonts.HersheySimplex, 0.9, Scalar.Red, 2);
 
-        Cv2.ImWrite(Path.Combine(dir, baseName + "_Marked.png"), marked);
+        if (SaveDebugImages) Cv2.ImWrite(Path.Combine(dir, baseName + "_Marked.png"), marked);
     }
 }
