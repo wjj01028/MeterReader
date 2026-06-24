@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using MeterReader.Wpf.Cell;
+using MeterReader.Wpf.Config;
 using Microsoft.Win32;
 
 namespace MeterReader.Wpf;

@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MeterReader.Wpf.Config;
 
 namespace MeterReader.Wpf.Cell;
 

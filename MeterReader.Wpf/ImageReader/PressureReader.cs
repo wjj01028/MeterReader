@@ -1,5 +1,6 @@
 using System.IO;
 using OpenCvSharp;
+using MeterReader.Wpf.ImageReader.Data;
 
 namespace MeterReader.Wpf.ImageReader;
 

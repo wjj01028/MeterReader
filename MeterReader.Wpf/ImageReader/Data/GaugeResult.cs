@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using OpenCvSharp;
 
-namespace MeterReader.App;
+namespace MeterReader.Wpf.ImageReader.Data;
 
 public class GaugeResult
 {

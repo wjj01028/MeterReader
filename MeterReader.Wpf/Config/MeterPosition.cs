@@ -1,4 +1,4 @@
-namespace MeterReader.Wpf;
+﻿namespace MeterReader.Wpf.Config;
 
 public class MeterPosition
 {

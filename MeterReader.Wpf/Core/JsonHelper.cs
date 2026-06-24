@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using MeterReader.Wpf.ImageReader.Data;
 
-namespace MeterReader.App;
+namespace MeterReader.Wpf.Core;
 
 public class JsonReadEntry
 {

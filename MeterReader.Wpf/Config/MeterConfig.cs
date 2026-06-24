@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MeterReader.Wpf;
+namespace MeterReader.Wpf.Config;
 
 public class MeterConfig
 {

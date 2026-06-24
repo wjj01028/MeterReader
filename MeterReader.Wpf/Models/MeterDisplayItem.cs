@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MeterReader.Wpf;
+namespace MeterReader.Wpf.Models;
 
 /// <summary>仪表列表展示项</summary>
 public class MeterDisplayItem : INotifyPropertyChanged
